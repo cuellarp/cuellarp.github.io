@@ -1,31 +1,74 @@
 /* ---------- Design tokens ---------- */
+/* Palette drawn from the tide/horizon gradient and navy script lettering in
+   the Chincoteague references — ocean teal-blue as the lone accent, cool
+   misty neutrals, kept low-saturation for a corporate-finance context. */
 :root {
-  --bg: #ffffff;
-  --bg-alt: #f7f8fb;
-  --text: #1c1e29;
-  --text-muted: #5c5f70;
-  --border: #e6e7ee;
-  --accent: #4f46e5;
-  --accent-dark: #3f37c9;
-  --accent-tint: #eef0fd;
+  --bg: #f6f8f8;
+  --bg-alt: #e9eef0;
+  --bg-deep: #d6e2e5;
+  --text: #1c2b30;
+  --text-muted: #57696d;
+  --border: #d7e0e2;
+  --border-deep: #c1d2d6;
+  --accent: #2c5f77;
+  --accent-dark: #1f4457;
+  --accent-tint: #dbe9ed;
+  --accent2: #6b98a6;
+  --accent2-tint: #d7ebee;
   --radius: 12px;
-  --shadow: 0 4px 20px rgba(28, 30, 41, 0.06);
+  --shadow: 0 4px 20px rgba(28, 43, 48, 0.07);
   --max-width: 1080px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #14151d;
-    --bg-alt: #1b1c26;
-    --text: #eef0f6;
-    --text-muted: #a3a6b8;
-    --border: #2b2d3a;
-    --accent: #8b85f0;
-    --accent-dark: #a6a1f5;
-    --accent-tint: #232244;
-    --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    --bg: #101820;
+    --bg-alt: #16212a;
+    --bg-deep: #1c2b33;
+    --text: #eef2f2;
+    --text-muted: #9fb0b4;
+    --border: #24333b;
+    --border-deep: #2c3e46;
+    --accent: #6fb0c4;
+    --accent-dark: #8fc4d4;
+    --accent-tint: #1c2f38;
+    --accent2: #4f7f8f;
+    --accent2-tint: #17272c;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   }
+}
+:root[data-theme="dark"] {
+  --bg: #101820;
+  --bg-alt: #16212a;
+  --bg-deep: #1c2b33;
+  --text: #eef2f2;
+  --text-muted: #9fb0b4;
+  --border: #24333b;
+  --border-deep: #2c3e46;
+  --accent: #6fb0c4;
+  --accent-dark: #8fc4d4;
+  --accent-tint: #1c2f38;
+  --accent2: #4f7f8f;
+  --accent2-tint: #17272c;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+:root[data-theme="light"] {
+  --bg: #f6f8f8;
+  --bg-alt: #e9eef0;
+  --bg-deep: #d6e2e5;
+  --text: #1c2b30;
+  --text-muted: #57696d;
+  --border: #d7e0e2;
+  --border-deep: #c1d2d6;
+  --accent: #2c5f77;
+  --accent-dark: #1f4457;
+  --accent-tint: #dbe9ed;
+  --accent2: #6b98a6;
+  --accent2-tint: #d7ebee;
+  --shadow: 0 4px 20px rgba(28, 43, 48, 0.07);
 }
 
 * { box-sizing: border-box; }
@@ -78,8 +121,9 @@ img { max-width: 100%; display: block; }
 }
 
 .brand {
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
   color: var(--text);
   text-decoration: none;
   letter-spacing: -0.01em;
@@ -138,7 +182,7 @@ img { max-width: 100%; display: block; }
   background: var(--accent);
   color: #fff;
 }
-.btn-primary:hover { background: var(--accent-dark); box-shadow: 0 6px 18px rgba(79, 70, 229, 0.28); }
+.btn-primary:hover { background: var(--accent-dark); box-shadow: 0 6px 18px rgba(44, 95, 119, 0.28); }
 
 .btn-ghost {
   background: transparent;
@@ -159,6 +203,7 @@ img { max-width: 100%; display: block; }
 .hero {
   padding: 96px 0 72px;
   text-align: center;
+  background: radial-gradient(ellipse 900px 520px at 50% -10%, var(--accent-tint) 0%, var(--bg) 60%);
 }
 
 .avatar {
@@ -178,15 +223,21 @@ img { max-width: 100%; display: block; }
 }
 
 .hero h1 {
-  font-size: clamp(2.1rem, 4vw, 3rem);
-  margin: 0 0 10px;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .eyebrow {
+  font-family: var(--font-mono);
   color: var(--accent);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   margin: 0 0 24px;
 }
 
@@ -220,13 +271,21 @@ img { max-width: 100%; display: block; }
 .meta-row a:hover { color: var(--accent); }
 
 /* ---------- Sections ---------- */
-.section { padding: 80px 0; }
-.section-alt { background: var(--bg-alt); }
+/* Each section sits at a different depth in the same blue family — pale
+   surface near the top, deepening toward a dark closing band at Contact —
+   so the page reads as distinct chapters rather than one flat sheet. */
+.section { padding: 80px 0; background: var(--bg); }
+.section-tint { background: var(--bg-alt); }
+.section-alt { background: var(--bg-deep); }
+.section-teal { background: var(--accent2-tint); }
 
 .section h2 {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
   margin: 0 0 8px;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .section-sub {
@@ -236,9 +295,11 @@ img { max-width: 100%; display: block; }
 }
 
 .subheading {
-  font-size: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: var(--text-muted);
   margin: 36px 0 14px;
 }
@@ -261,8 +322,16 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow);
 }
 
-.card-icon { font-size: 1.7rem; margin-bottom: 14px; }
-.card h3 { font-size: 1.05rem; margin: 0 0 10px; }
+.card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent2);
+  margin-bottom: 12px;
+}
+.card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin: 0 0 10px; }
 .card p { color: var(--text-muted); font-size: 0.94rem; margin: 0; }
 
 .skills-grid { margin-top: 20px; }
@@ -309,19 +378,22 @@ img { max-width: 100%; display: block; }
   height: 12px;
   border-radius: 50%;
   background: var(--accent);
-  border: 2px solid var(--bg-alt);
+  border: 2px solid var(--bg-deep);
 }
 
+.timeline { border-left-color: var(--border-deep); }
+
 .timeline-when {
-  color: var(--accent);
+  font-family: var(--font-mono);
+  color: var(--accent2);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   margin-bottom: 6px;
 }
 
-.timeline-body h3 { margin: 0 0 4px; font-size: 1.15rem; }
+.timeline-body h3 { font-family: var(--font-display); font-weight: 600; margin: 0 0 4px; font-size: 1.2rem; }
 .timeline-org { color: var(--text-muted); font-size: 0.92rem; margin: 0 0 12px; }
 .timeline-body ul { padding-left: 20px; margin: 0; }
 .timeline-body li { color: var(--text-muted); margin-bottom: 8px; font-size: 0.95rem; }
@@ -347,13 +419,14 @@ img { max-width: 100%; display: block; }
   font-size: 0.98rem;
 }
 .contact-label {
+  font-family: var(--font-mono);
   width: 90px;
   flex-shrink: 0;
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   padding-top: 2px;
 }
 .contact-list a { color: var(--text); text-decoration: none; }
@@ -403,13 +476,46 @@ img { max-width: 100%; display: block; }
   color: var(--text-muted);
 }
 
+/* ---------- Contact: deliberate dark closing band ---------- */
+/* Fixed navy, independent of the page's light/dark theme — the site's
+   "into deep water" ending note, not a toggle-driven state. */
+.section-dark {
+  background: #142228;
+  color: #eef4f4;
+}
+.section-dark .section-sub { color: #9fb7bb; }
+.section-dark .contact-list li { border-bottom-color: #294249; }
+.section-dark .contact-label { color: #7fa0a6; }
+.section-dark .contact-list a,
+.section-dark .contact-list span { color: #eef4f4; }
+.section-dark .contact-list a:hover { color: #7fd0e0; }
+.section-dark .contact-form {
+  background: #1a2e35;
+  border-color: #294249;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+.section-dark .contact-form label { color: #9fb7bb; }
+.section-dark .contact-form input,
+.section-dark .contact-form textarea {
+  background: #142228;
+  border-color: #294249;
+  color: #eef4f4;
+}
+.section-dark .contact-form input:focus,
+.section-dark .contact-form textarea:focus { border-color: #7fd0e0; }
+.section-dark .form-note { color: #7fa0a6; }
+.section-dark .btn-primary { background: #4a95ab; }
+.section-dark .btn-primary:hover { background: #5ba9c0; box-shadow: 0 6px 18px rgba(74, 149, 171, 0.35); }
+
 /* ---------- Footer ---------- */
+/* Extends the dark Contact band rather than snapping back to light. */
 .site-footer {
   padding: 32px 0;
   text-align: center;
-  color: var(--text-muted);
+  background: #142228;
+  color: #7fa0a6;
   font-size: 0.85rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #294249;
 }
 
 /* ---------- Responsive ---------- */
